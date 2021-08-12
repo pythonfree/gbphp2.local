@@ -23,9 +23,9 @@ class Material
 //4. Придумать наследников класса из п.1. Чем они будут отличаться?
 class Cloth extends Material
 {
-        private $embroidery; //Ткань дополнительно имеет вышивку.
+    private $embroidery; //Ткань дополнительно имеет вышивку.
 
-        public function getEmbroidery() {} //Получаем вышивку
+    public function getEmbroidery() {} //Получаем вышивку
 }
 
 
