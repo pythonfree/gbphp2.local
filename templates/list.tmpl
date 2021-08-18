@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Работа с файлами</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <header>
+      <h1>{{ h1 }}</h1>
+    </header>
+
+  <div class="images">
+    {% for image in images %}
+      <a href="image.php?photo={{ image }}">
+        <img src="{{ PHOTO_SMALL }}{{ image }}">
+      </a>
+    {% endfor %}
+  </div>
+
+  </body>
+</html>
+
