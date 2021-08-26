@@ -1,29 +1,46 @@
 <?php
 //
-// Базовый контроллер сайта.
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 //
 abstract class C_Base extends C_Controller
 {
-	protected $title;		// заголовок страницы
-	protected $content;		// содержание страницы
+    protected $title;        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    protected $content;        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     protected $keyWords;
+    protected $showAuthForm;
+    protected $showExitButton;
+    protected $userAction;
+    protected $buttonCaption;
 
 
-     protected function before(){
+    protected function before()
+    {
 
-		$this->title = 'тест';
-		$this->content = '';
-		$this->keyWords="...";
+        $this->title = 'РЎС‚СЂР°РЅРёС†Р°';
+        $this->content = '';
+        $this->keyWords = "...";
+        $this->showAuthForm = true;
+        $this->showExitButton = false;
+        $this->userAction  = 'auth';
+        $this->buttonCaption = 'Р’РѕР№С‚Рё';
 
-	}
-	
-	//
-	// Генерация базового шаблонаы
-	//	
-	public function render()
-	{
-		$vars = array('title' => $this->title, 'content' => $this->content,'kw' => $this->keyWords);
-		$page = $this->Template('v/v_main.php', $vars);				
-		echo $page;
-	}	
+    }
+
+    //
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    //
+    public function render()
+    {
+        $vars = [
+            'title' => $this->title,
+            'content' => $this->content,
+            'kw' => $this->keyWords,
+            'showAuthForm' => $this->showAuthForm,
+            'showExitButton' => $this->showExitButton,
+            'userAction' => $this->userAction,
+            'buttonCaption' => $this->buttonCaption
+        ];
+        $page = $this->Template(__DIR__ . '/../v/v_main.php', $vars);
+        echo $page;
+    }
 }
