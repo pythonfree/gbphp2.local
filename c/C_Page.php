@@ -1,34 +1,35 @@
 <?php
 //
-// Конттроллер страницы чтения.
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
 //
-include_once('m/model.php');
+include_once __DIR__ . '/../m/model.php';
 
 class C_Page extends C_Base
 {
-	//
-	// нет конструктора в C_BASE, поэтому убрали конструктор из текущего класса
-	//
-	
-	public function action_index(){
-		$this->title .= '::Чтение';
-		$text = text_get();
-		//$today = date();
-		$this->content = $this->Template('v/v_index.php', array('text' => $text));	
-	}
-	
-    
-	public function action_edit(){
-		$this->title .= '::Редактирование';
-		
-		if($this->isPost())
-		{
-			text_set($_POST['text']);
-			header('location: index.php');
-			exit();
-		}
-		
-		$text = text_get();
-		$this->content = $this->Template('v/v_edit.php', array('text' => $text));		
-	}
+    //
+    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ C_BASE, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    //
+
+    public function action_index()
+    {
+        $this->title .= '::Р“Р»Р°РІРЅР°СЏ';
+        $text = text_get();
+        //$today = date();
+        $this->content = $this->Template(__DIR__ . '/../v/v_index.php', ['text' => $text]);
+    }
+
+
+    public function action_edit()
+    {
+        $this->title .= '::пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
+
+        if ($this->isPost()) {
+            text_set($_POST['text']);
+            header('location: index.php');
+            exit();
+        }
+
+        $text = text_get();
+        $this->content = $this->Template('v/v_edit.php', array('text' => $text));
+    }
 }
