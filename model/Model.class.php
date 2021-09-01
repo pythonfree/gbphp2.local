@@ -1,9 +1,10 @@
 <?php
 
-abstract class Model {
+abstract class Model
+{
 
-    protected static $table;
-    protected static $properties = [
+    protected static string $table;
+    protected static array $properties = [
         'id' => [
             'type' => 'int',
             'autoincrement' => true,
@@ -35,7 +36,8 @@ abstract class Model {
     }
 
     /**
-     * Вызывается в конструкторе и при генерации, чтобы дополнить базовый набор свойств
+     * Вызывается в конструкторе и при генерации, чтобы дополнить
+     * базовый набор свойств
      */
     protected static function setProperties()
     {
@@ -44,7 +46,9 @@ abstract class Model {
 
     public final static function generate()
     {
-        if (self::tableExists()) throw new Exception('Table already exists');
+        if (self::tableExists()) {
+            throw new Exception('Table already exists');
+        }
         static::setProperties();
         $query = 'CREATE TABLE ' . static::$table . ' (';
         foreach (static::$properties as $property => $params) {
@@ -54,15 +58,15 @@ abstract class Model {
             $query .= ' `' . $property . '`';
 
             $query .= ' ' . $params['type'];
-            if ( isset($params['size'])) {
-                $query .= '(' .$params['size'] .')';
+            if (isset($params['size'])) {
+                $query .= '(' . $params['size'] . ')';
             }
 
-            if( isset ($params['unsigned']) && $params['unsigned']) {
+            if (isset ($params['unsigned']) && $params['unsigned']) {
                 $query .= ' UNSIGNED';
             }
 
-            if( isset ($params['autoincrement']) && $params['autoincrement']) {
+            if (isset ($params['autoincrement']) && $params['autoincrement']) {
                 $query .= ' AUTO_INCREMENT';
             }
             $query .= ',' . "\n";
@@ -78,20 +82,20 @@ abstract class Model {
         $this->checkProperty($name);
         $return = null;
 
-        switch(static::$property['type']) {
+        switch (static::$properties[$name]['type']) {
             case 'int':
                 return (int)$this->$name;
-                // break;
+            // break;
             default:
                 return (string)$this->$name;
-                // break;
+            // break;
         }
     }
 
     public function __set($name, $value)
     {
         $this->checkProperty($name);
-        switch(static::$properties[$name]['type']) {
+        switch (static::$properties[$name]['type']) {
             case 'int':
                 $this->$name = (int)$value;
                 break;
@@ -109,7 +113,7 @@ abstract class Model {
         return count(db::getInstance()->select('SHOW TABLES LIKE "' . static::$table . '"')) > 0;
     }
 
-    protected final function checkProperty($name)
+    protected final function checkProperty($name): bool
     {
         if (!isset(static::$properties[$name])) {
             throw new Exception('Undefined property ' . $name);
@@ -117,6 +121,7 @@ abstract class Model {
         if (!isset(static::$properties[$name]['type'])) {
             throw new Exception('Undefined type for property ' . $name);
         }
+        return true;
     }
 }
-?>
+

@@ -2,7 +2,8 @@
 
 class OrderController extends Controller
 {
-    public function add(){
+    public function add()
+    {
         $_GET['asAjax'] = true;
 
         $result = [
@@ -10,7 +11,7 @@ class OrderController extends Controller
         ];
 
         $id_good = (int)$_POST['id_good'];
-        if($id_good > 0){
+        if ($id_good > 0) {
             $basket = new Basket();
             $basket->setIdGood($id_good);
             $basket->setPrice(Good::getGoodPrice($id_good));

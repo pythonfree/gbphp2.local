@@ -1,7 +1,8 @@
 <?php
+
 class AdminController extends Controller
 {
-    
+
     protected $controls = [
         'pages' => 'Page',
         'orders' => 'Order',
@@ -10,8 +11,8 @@ class AdminController extends Controller
     ];
 
     public $title = 'admin';
-    
-    public function index($data)
+
+    public function index($data): array
     {
         return ['controls' => $this->controls];
     }
@@ -40,7 +41,7 @@ class AdminController extends Controller
             }
         }
 
-        switch($actionId['action']) {
+        switch ($actionId['action']) {
             case 'create':
                 $query = 'INSERT INTO ' . $data['id'] . ' ';
                 $keys = [];
@@ -74,7 +75,7 @@ class AdminController extends Controller
             $items[] = (array)$tmp;
         }
 
-        return ['name' => $data['id'],'fields' => $fields, 'items' => $items];
+        return ['name' => $data['id'], 'fields' => $fields, 'items' => $items];
     }
 
     protected function getActionId($data)

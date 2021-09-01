@@ -1,6 +1,9 @@
 <?php
-class Test{
-     function Test(){
+
+class Test
+{
+    function Test()
+    {
         return "Good 1";
     }
 }

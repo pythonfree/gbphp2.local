@@ -1,4 +1,4 @@
-$(document).on('click', '.category-link', function(){
+$(document).on('click', '.category-link', function () {
     if (!$('#catalog-data').length) {
         return true;
     }
@@ -7,7 +7,7 @@ $(document).on('click', '.category-link', function(){
         url: '/index.php?page=categories&action=index&id=' + self.attr('link') + '&asAjax=true',
         type: 'GET',
         dataType: 'json'
-    }).done(function(data) {
+    }).done(function (data) {
         var categoryList = $('<ul></ul>');
         var catalogData = $('#catalog-data');
         catalogData.empty();

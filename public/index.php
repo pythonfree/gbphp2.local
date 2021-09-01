@@ -1,4 +1,4 @@
 <?php
-include '../app.php';
 
-?>
+
+include __DIR__ . '/../app.php';

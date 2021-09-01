@@ -19,7 +19,8 @@ class Basket extends Model
         parent::__construct($values);
     }
 
-    function setUser($id_user){
+    function setUser($id_user)
+    {
         $this->id_user = $id_user;
     }
 
@@ -55,13 +56,14 @@ class Basket extends Model
         $this->id_order = $id_order;
     }
 
-    public function save(){
+    public function save()
+    {
         $query = "INSERT INTO basket(id_user, id_good, price, is_in_order) VALUES 
                   (
-                    ".(($this->id_user)==NULL ? 'NULL' : $this->id_user).",
-                    ".$this->id_good.",
-                    ".$this->price.",
-                    ".$this->is_in_order."
+                    " . (($this->id_user) == NULL ? 'NULL' : $this->id_user) . ",
+                    " . $this->id_good . ",
+                    " . $this->price . ",
+                    " . $this->is_in_order . "
                   )";
         db::getInstance()->Query($query);
     }

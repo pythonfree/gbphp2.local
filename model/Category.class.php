@@ -1,7 +1,7 @@
 <?php
 
 class Category extends Model {
-    protected static $table = 'categories';
+    protected static string $table = 'categories';
 
     protected static function setProperties()
     {
@@ -18,7 +18,8 @@ class Category extends Model {
     public static function getCategories($parentId = 0)
     {
         return db::getInstance()->Select(
-            'SELECT id_category, name FROM categories WHERE status=:status AND parent_id = :parent_id',
+            'SELECT id_category, name FROM categories WHERE status=:status 
+                        AND parent_id = :parent_id',
             ['status' => Status::Active, 'parent_id' => $parentId]);
     }
 }

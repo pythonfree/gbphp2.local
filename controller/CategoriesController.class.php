@@ -1,4 +1,5 @@
 <?php
+
 class CategoriesController extends Controller
 {
 
@@ -6,24 +7,25 @@ class CategoriesController extends Controller
 
     public function index($data)
     {
-        $categories = Category::getCategories(isset($data['id']) ? $data['id'] : 0);
+        $categories = Category::getCategories($data['id'] ?? 0);
         $goods = Good::getGoods(isset($data['id']) ? $data['id'] : 0);
         return ['subcategories' => $categories, 'goods' => $goods];
     }
 
-    public function goods($data){
-        if($data['id'] > 0){
+    public function goods($data)
+    {
+        if ($data['id'] > 0) {
             $good = new Good([
                 "id_good" => $data['id']
             ]);
 
             return $good->getGoodInfo()[0];
-        }
-        else{
+        } else {
             header("Location: /categories/");
         }
 
+        return null;
 
     }
 }
-?>
+

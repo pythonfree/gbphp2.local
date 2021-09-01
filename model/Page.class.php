@@ -1,8 +1,9 @@
 <?php
 
-class Page extends Model {
+class Page extends Model
+{
     protected static $table = 'pages';
-    
+
     protected static function setProperties()
     {
         self::$properties['name'] = [

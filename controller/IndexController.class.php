@@ -10,13 +10,14 @@ class IndexController extends Controller
         parent::__construct();
         $this->title .= ' | ДЕМО!!!';
     }
-	
-	//метод, который отправляет в представление информацию в виде переменной content_data
-	function index($data){
-		 return "test";
-	}
 
-	/*function test($id){
+    //метод, который отправляет в представление информацию в виде переменной content_data
+    function index($data)
+    {
+        return "test";
+    }
+
+    /*function test($id){
 
     }
 */

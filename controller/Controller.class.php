@@ -10,7 +10,8 @@ class Controller
         $this->title = Config::get('sitename');
     }
 
-    public function index($data) {
+    public function index($data)
+    {
         return [];
     }
 }

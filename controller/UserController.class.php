@@ -2,7 +2,8 @@
 
 class UserController extends Controller
 {
-    function index(){
+    function index()
+    {
 
     }
 

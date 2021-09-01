@@ -2,14 +2,15 @@
 
 class Config
 {
-    private static $configCache = [];
+    private static array $configCache = [];
 
     public static function get($parameter)
     {
-        if (!isset(self::getCurrentConfiguration()[$parameter])) {
+        $paramValue = self::getCurrentConfiguration()[$parameter];
+        if (!isset($paramValue)) {
             throw new Exception('Parameter ' . $parameter . ' does not exists');
         }
-        return self::getCurrentConfiguration()[$parameter];
+        return $paramValue;
     }
 
     private static function getCurrentConfiguration()
@@ -19,11 +20,11 @@ class Config
             $configProd = $configDir . 'config.prod.php';
             $configDev = $configDir . 'config.dev.php';
             $configDefault = $configDir . 'config.default.php';
-            if (is_file($configProd)) {
+            if (is_readable($configProd)) {
                 require_once $configProd;
-            } else if (is_file($configDev)) {
+            } elseif (is_readable($configDev)) {
                 require_once $configDev;
-            } else if (is_file($configDefault)) {
+            } elseif (is_readable($configDefault)) {
                 require_once $configDefault;
             } else {
                 throw new Exception('Unable to find configuration file');
@@ -36,4 +37,5 @@ class Config
         return self::$configCache;
     }
 }
+
 ?>
