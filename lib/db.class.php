@@ -58,6 +58,7 @@ class db
     public function Query($query, $params = [])
     {
         $res = $this->db->prepare($query);
+//        dump($res);
         $res->execute($params);
         return $res;
     }

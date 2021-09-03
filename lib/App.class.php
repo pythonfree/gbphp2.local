@@ -8,9 +8,9 @@ class App
         db::getInstance()->Connect(Config::get('db_user'),
                                     Config::get('db_password'),
                                     Config::get('db_base'));
-
-        if (php_sapi_name() !== 'cli' && isset($_SERVER) && isset($_GET)) {
-            self::web($_GET['path'] ?: '');
+//        dump($_POST);
+        if (php_sapi_name() !== 'cli' && isset($_SERVER) && isset($_REQUEST)) {
+            self::web($_REQUEST['path'] ?: '');
         }
     }
 
@@ -18,45 +18,51 @@ class App
 
     protected static function web($url)//РОУТЕР!!!
     {
+//        dump($_GET);
         $url = explode("/", $url);
         if (!empty($url[0])) {
-            $_GET['page'] = $url[0];//Часть имени класса контроллера
+            $_REQUEST['page'] = $url[0];//Часть имени класса контроллера
             if (isset($url[1])) {
                 if (is_numeric($url[1])) {
-                    $_GET['id'] = $url[1];
+                    $_REQUEST['id'] = $url[1];
                 } else {
-                    $_GET['action'] = $url[1];//часть имени метода
+                    $_REQUEST['action'] = $url[1];//часть имени метода
                 }
                 if (isset($url[2])) {//формальный параметр для метода контроллера
-                    $_GET['id'] = $url[2];
+                    $_REQUEST['id'] = $url[2];
                 }
             }
         } else {
-            $_GET['page'] = 'index';
+            $_REQUEST['page'] = 'index';
         }
 
-        if (isset($_GET['page'])) {
-            $controllerName = ucfirst($_GET['page']) . 'Controller';//IndexController
+        if (isset($_REQUEST['page'])) {
+            $controllerName = ucfirst($_REQUEST['page']) . 'Controller';//IndexController
             $controller = new $controllerName();
-            $methodName = $_GET['action'] ?? 'index';
+            $methodName = $_REQUEST['action'] ?? 'index';
 
             //Ключи данного массива доступны в любой вьюшке
             //Массив data - это массив для использования в любой вьюшке
             $data = [
-                'content_data' => $controller->$methodName($_GET), //IndexController->index($_GET)
+                'content_data' => $controller->$methodName($_REQUEST), //IndexController->index($_GET)
                 'title' => $controller->title,
-                'categories' => Category::getCategories(0)
+                'h1' => $controller->h1,
+                'categories' => Category::getCategories(0),
             ];
 
-            if (!isset($_GET['asAjax'])) {
+//            dump($data);
+            if (!isset($_REQUEST['asAjax'])) {
                 $loader = new Twig_Loader_Filesystem(Config::get('path_templates'));
                 $twig = new Twig_Environment($loader);
                 $view = $controller->view . '/' . $methodName . '.html';
                 $template = $twig->loadTemplate($view);
-
                 echo $template->render($data);
             } else {
-                echo json_encode($data);
+//                dump($data);
+                file_put_contents(__DIR__ . '/../logs/datajax.txt', '');
+                file_put_contents(__DIR__ . '/../logs/datajax.txt', $data['content_data']);
+                echo $data['content_data'];
+//                unset($_REQUEST['asAjax']);
             }
         }
     }
