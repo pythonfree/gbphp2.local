@@ -1,0 +1,18 @@
+{% include 'header.html' %}
+
+<div id="goods-data" class="d-flex flex-row justify-content-around flex-wrap">
+
+    {% for good in content_data.goods %}
+    <div class="card mb-2" style="width: 18rem;">
+        <img src="/images/{{good.img}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ good.name }}</h5>
+            <p class="card-text">{{good.description|slice(0, 100)}}...</p>
+            <a href="/categories/goods/{{ good.id_good }}/" class="btn btn-primary">Подробно</a>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% include 'footer.html' %}

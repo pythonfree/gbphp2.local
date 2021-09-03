@@ -2,10 +2,11 @@
 
 class Controller
 {
-    public $view = 'admin';
-    public $title;
+    public string $view = 'admin';
+    public string $title = '';
+    public string $h1 = '';
 
-    function __construct()
+    public function __construct()
     {
         $this->title = Config::get('sitename');
     }

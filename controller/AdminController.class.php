@@ -10,8 +10,6 @@ class AdminController extends Controller
         'goods' => 'Good'
     ];
 
-    public $title = 'admin';
-
     public function index($data): array
     {
         return ['controls' => $this->controls];

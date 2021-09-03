@@ -1,0 +1,20 @@
+{% include 'header.html' %}
+
+<div id="orders-data" class="d-flex flex-row justify-content-around flex-wrap">
+
+    {% for order in content_data.orders %}
+    <div id="card_{{ order.id_basket }}" class="card" style="width: 18rem;">
+        <img src="/images/{{order.img}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ order.name }}</h5>
+            <p class="card-text">{{order.description|slice(0, 100)}}...</p>
+            <a id="del_basket_element" data-id="{{ order.id_basket }}" href="/basket/delete/{{ order.id_basket }}/" class="btn btn-warning">Удалить</a>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% include 'footer.html' %}
+
+

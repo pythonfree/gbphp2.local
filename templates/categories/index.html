@@ -1,17 +1,20 @@
 {% include 'header.html' %}
-<div id="catalog-data">
-    <ul>
-        {% for subcategory in content_data.subcategories %}
-        <li><a href="/index.php?page=categories&id={{ subcategory.id_category }}">{{ subcategory.name }}</a></li>
-        {% endfor %}
-    </ul>
+
+<div id="goods-data" class="d-flex flex-row justify-content-around">
+
+    {% for good in content_data.goods %}
+    <div class="card" style="width: 18rem;">
+        <img src="/images/{{good.img}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ good.name }}</h5>
+            <p class="card-text">{{good.description|slice(0, 100)}}...</p>
+            <a href="/categories/goods/{{ good.id_good }}/" class="btn btn-primary">Подробно</a>
+        </div>
+    </div>
+    {% endfor %}
+
 </div>
 
-<div id="goods-data">
-    <ul>
-        {% for good in content_data.goods %}
-        <li><a href="/categories/goods/{{ good.id_good }}/">{{ good.name }}</a></li>
-        {% endfor %}
-    </ul>
-</div>
 {% include 'footer.html' %}
+
+

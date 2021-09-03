@@ -2,25 +2,19 @@
 
 class IndexController extends Controller
 {
-    public $view = 'index';
-    public $title;
+    public string $view = 'index';
 
     function __construct()
     {
         parent::__construct();
-        $this->title .= ' | ДЕМО!!!';
+        $this->h1 .= 'Выбери свою профессию!';
     }
 
     //метод, который отправляет в представление информацию в виде переменной content_data
     function index($data)
     {
-        return "test";
+        return 'Только сегодня, приобретая ЛЮБЫЕ два курса, оплатить нужно только один!';
     }
-
-    /*function test($id){
-
-    }
-*/
 
 }
 

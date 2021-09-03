@@ -1,7 +1,8 @@
 {% include 'header.html' %}
 
 <h1>{{ content_data.name }}</h1>
-<p>{{ content_data.price }}</p>
-<p id='buyme' class='good_{{ content_data.id_good }}'>Купить</p>
-
+<p>{{ content_data.description }}</p>
+<p>Стоимость обучения: {{ content_data.price }} руб.</p>
+<!--<p id='buyme' class='good_{{ content_data.id_good }}'>Купить</p>-->
+<a id='buyme' data-id='good_{{ content_data.id_good }}' href="/categories/goods/{{ good.id_good }}/" class="btn btn-primary">Купить</a>
 {% include 'footer.html' %}
